@@ -4,28 +4,57 @@
 % represents the pairwise interaction that b acts on a. e_{ab} represents 
 % the emotion contagion that b acts on a. U is the potential field.
 % By default, the positions are updated using forward Euler.
-function [x_updated, y_updated, v_updated, w_updated, qx_update, qy_updated] = update(x, y, v, w, dt, gxx, gxy, gyx, gyy, U, qx, qy)
-    %Update the velocity fields
-    v_updated = v + gxx(x) + gxy(x, y) + U(x);
-    w_updated = w + gyx(x, y) + gyy(y) + U(y);
+
+
+
+
+% function [x_updated, y_updated, v_updated, w_updated, qx_update, qy_updated] = update(x, y, v, w, dt, gxx, gxy, gyx, gyy, U, qx, qy)
+%     %Update the velocity fields
+%     v_updated = v + gxx(x) + gxy(x, y) + U(x);
+%     w_updated = w + gyx(x, y) + gyy(y) + U(y);
+% 
+%     %Update the positions
+%     x_updated = x + dt * v_updated;
+%     y_updated = y + dt * w_updated;
+% 
+%     %Update the emotions using the piecewise function g
+%     beta = 1;
+%     R = 36;
+%     qx_update = zeros(size(qx));
+%     qy_update = zeros(size(qy));
+%     for i=1:size(qx)
+%         for j=1:size(qy)
+%             dist = x(i, :) - x(j, :);
+%             if dist < 
+%             diff = qx(i) - qx(j);
+% 
+%         end
+%     end
+% 
+% end
+
+
+%Update function for homogeneous agents without emotion
+function [x_updated, v_updated] = update(x, v, dt, g, U, e)
+    %Update the velocity field
+    v_updated = v + 0.1 * g(x) + U(x, e);
 
     %Update the positions
     x_updated = x + dt * v_updated;
-    y_updated = y + dt * w_updated;
 
-    %Update the emotions using the piecewise function g
-    beta = 1;
-    R = 36;
-    qx_update = zeros(size(qx));
-    qy_update = zeros(size(qy));
-    for i=1:size(qx)
-        for j=1:size(qy)
-            dist = x(i, :) - x(j, :);
-            if dist < 
-            diff = qx(i) - qx(j);
-
-        end
-    end
+%     %Update the emotions using the piecewise function g
+%     beta = 1;
+%     R = 36;
+%     qx_update = zeros(size(qx));
+%     qy_update = zeros(size(qy));
+%     for i=1:size(qx)
+%         for j=1:size(qy)
+%             dist = x(i, :) - x(j, :);
+%             if dist < 
+%             diff = qx(i) - qx(j);
+% 
+%         end
+%     end
 
 end
 
