@@ -21,7 +21,7 @@ function u = DOrsogna_Bertozzi_homo(x, q)
                     temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
                     % Add the emotional effect
                     if nargin > 1
-                        temp = temp / (1 + q(j) - q(i));
+                        temp = temp / (2 + q(j) - q(i));
                     end
                     u(i, :) = u(i, :) + temp * (x(i, :)-x(j, :));
                 end

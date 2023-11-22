@@ -8,53 +8,48 @@
 
 
 
-% function [x_updated, y_updated, v_updated, w_updated, qx_update, qy_updated] = update(x, y, v, w, dt, gxx, gxy, gyx, gyy, U, qx, qy)
-%     %Update the velocity fields
-%     v_updated = v + gxx(x) + gxy(x, y) + U(x);
-%     w_updated = w + gyx(x, y) + gyy(y) + U(y);
-% 
-%     %Update the positions
-%     x_updated = x + dt * v_updated;
-%     y_updated = y + dt * w_updated;
-% 
-%     %Update the emotions using the piecewise function g
-%     beta = 1;
-%     R = 36;
-%     qx_update = zeros(size(qx));
-%     qy_update = zeros(size(qy));
-%     for i=1:size(qx)
-%         for j=1:size(qy)
-%             dist = x(i, :) - x(j, :);
-%             if dist < 
-%             diff = qx(i) - qx(j);
-% 
-%         end
-%     end
-% 
-% end
+function [x_updated, v_updated, q_updated] = update(x, v, dt, g, U, e, q)
 
-
-%Update function for homogeneous agents without emotion
-function [x_updated, v_updated] = update(x, v, dt, g, U, e)
     %Update the velocity field
-    v_updated = v + 0.1 * g(x) + U(x, e);
+    v_updated = v + 0.05 * g(x, q) + U(x, e);
 
     %Update the positions
     x_updated = x + dt * v_updated;
 
-%     %Update the emotions using the piecewise function g
-%     beta = 1;
-%     R = 36;
-%     qx_update = zeros(size(qx));
-%     qy_update = zeros(size(qy));
-%     for i=1:size(qx)
-%         for j=1:size(qy)
-%             dist = x(i, :) - x(j, :);
-%             if dist < 
-%             diff = qx(i) - qx(j);
-% 
-%         end
-%     end
+    %Update the emotions using the piecewise function g
+    beta = 1.5;
+    R = 10;
+    q_updated = zeros(size(q));
 
+    for i=1:size(q)
+        for j=1:size(q)
+            total_sum = 0;
+            total_count = 0;
+            dist = norm(x(i, :) - x(j, :));
+            if dist < R
+                total_count = total_count + 1;
+                diff = q(i) - q(j);
+                if diff > 0
+                    total_sum = total_sum + beta * diff;
+                elseif diff < 0
+                    total_sum = total_sum + 0.5 * beta * diff;
+                end
+
+                q_updated(i) = total_sum / total_count;
+            end
+        end
+
+    end
 end
+
+
+% %Update function for homogeneous agents without emotion
+% function [x_updated, v_updated] = update(x, v, dt, g, U, e)
+%     %Update the velocity field
+%     v_updated = v + 0.1 * g(x) + U(x, e);
+% 
+%     %Update the positions
+%     x_updated = x + dt * v_updated;
+% 
+% end
 
