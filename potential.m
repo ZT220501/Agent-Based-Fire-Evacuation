@@ -6,11 +6,11 @@ function U = potential(x, e)
     U2 = rand;
 
     % Weight in the hill function h(x)=x/(c0+x)
-    c0 = 0.5;
+    c0 = 5;
 
     % Weight of the local best position and the global best position.
-    c1 = 1;
-    c2 = 0;
+    c1 = 0.5;
+    c2 = 1;
 
 
 
@@ -31,14 +31,19 @@ function U = potential(x, e)
 
         %Evaluate the gradient nearby
         f = @(a, b) piecewiseFunction(a, b);
-        [x1, x2] = meshgrid(linspace(x(i, 1), x(i, 1)+1, 2), linspace(x(i, 2), x(i, 2)+1, 2));
+        [x1, x2] = meshgrid(linspace(x(i, 1)-0.01, x(i, 1)+0.01, 3), linspace(x(i, 2)-0.01, x(i, 2)+0.01, 3));
         z = f(x1, x2);
         % z(obstacleRegion) = NaN;
-        grad = gradient(z,1,1);
+        [grad_x, grad_y] = gradient(z, 0.01, 0.01);
+        grad_p = [grad_x(2), grad_y(2)];
+
 
 
         %U(i, :) = c2 * U2 * global_optimal_dir / (norm(global_optimal_dir, 2) + c0);
-        U(i, :) = c1 * U1 * grad(1, :)/(norm(grad(1, :), 2) + c0) + c2 * U2 * global_optimal_dir / (norm(global_optimal_dir, 2) + c0);
+        U(i, :) = -c1 * U1 * grad_p/(norm(grad_p, 2) + c0) + c2 * U2 * global_optimal_dir / (norm(global_optimal_dir, 2) + c0);
+        
+
+        
     end
     
 end

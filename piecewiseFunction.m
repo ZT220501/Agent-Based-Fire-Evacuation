@@ -1,7 +1,7 @@
 function result = piecewiseFunction(x, y)
     
     wh = 50; % wall height
-    slope = 1; % slope towards street
+    slope = 5; % slope towards street
 
     region1 = (y >= 0 & y < 10);
     region2 = (y >= 10 & y < 15);

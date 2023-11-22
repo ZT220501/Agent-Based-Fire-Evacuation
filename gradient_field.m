@@ -3,7 +3,7 @@ f = @(x, y) piecewiseFunction(x, y);
 % obstacleRegion = (x > 15 & x < 35 & y > 3 & y < 7);
 z = f(x, y);
 % z(obstacleRegion) = NaN;
-[gradX, gradY] = gradient(z,1,1);
+[gradX, gradY] = gradient(z,50/200,50/200);
 
 figure;
 subplot(1, 2, 1);
