@@ -1,6 +1,6 @@
 function u = Lennard_Jones_homo(x, q)
     A = 1;
-    B = 6 * B;
+    B = 6 * A;
 
     R = 36;
 
