@@ -20,6 +20,9 @@ ylabel('Y-axis');
 title('Gradient Vectors');
 
 function result = piecewiseFunction(x, y)
+    
+    wh = 100; % wall height
+
     region1 = (y >= 0 & y < 10);
     region2 = (y >= 10 & y < 15);
     region3 = (y >= 15 & y < 25);
@@ -69,37 +72,37 @@ function result = piecewiseFunction(x, y)
     value5 = 50 - x(region5);
     value6 = 50 - x(region6) +5 -0.5 * (50 - y(region6));
     v1 = 50 - x(sr1) +5 -0.5 * y(sr1) + 0.5*(7 - y(sr1)); 
-    v2 = 60;
+    v2 = wh+10;
     v3 = 50 - x(sr3) +5 -0.5 * y(sr3) + 0.5*(7 - y(sr3)); 
-    v4 = 50;
+    v4 = wh;
     v5 = 50 - x(sr5) +5 -0.5 * y(sr5) + 0.5*(7 - y(sr5)); 
-    v6 = 40;
+    v6 = wh-10;
     v7 = 50 - x(sr7) +5 -0.5 * y(sr7) + 0.5*(7 - y(sr7)); 
-    v8 = 30;
+    v8 = wh-20;
     v9 = 50 - x(sr9) +5 -0.5 * (25 - y(sr9)) + 0.5*(y(sr9) - 18); 
-    v10 = 60;
+    v10 = wh+10;
     v11 = 50 - x(sr11) +5 -0.5 * (25 - y(sr11)) + 0.5*(y(sr11) - 18); 
-    v12 = 50;
+    v12 = wh;
     v13 = 50 - x(sr13) +5 -0.5 * (25 - y(sr13)) + 0.5*(y(sr13) - 18); 
-    v14 = 40;
+    v14 = wh-10;
     v15 = 50 - x(sr15) +5 -0.5 * (25 - y(sr15)) + 0.5*(y(sr15) - 18); 
-    v16 = 30;
+    v16 = wh-20;
     v17 = 50 - x(sr17) +5 -0.5 * (y(sr17) - 25) + 0.5*(32 - y(sr17)); 
-    v18 = 60;
+    v18 = wh+10;
     v19 = 50 - x(sr19) +5 -0.5 * (y(sr19) - 25) + 0.5*(32 - y(sr19)); 
-    v20 = 50;
+    v20 = wh;
     v21 = 50 - x(sr21) +5 -0.5 * (y(sr21) - 25) + 0.5*(32 - y(sr21)); 
-    v22 = 40;
+    v22 = wh-10;
     v23 = 50 - x(sr23) +5 -0.5 * (y(sr23) - 25) + 0.5*(32 - y(sr23)); 
-    v24 = 30;
+    v24 = wh-20;
     v25 = 50 - x(sr25) +5 -0.5 * (50 - y(sr25)) + 0.5*(y(sr25) - 43); 
-    v26 = 60;
+    v26 = wh+10;
     v27 = 50 - x(sr27) +5 -0.5 * (50 - y(sr27)) + 0.5*(y(sr27) - 43); 
-    v28 = 50;
+    v28 = wh;
     v29 = 50 - x(sr29) +5 -0.5 * (50 - y(sr29)) + 0.5*(y(sr29) - 43); 
-    v30 = 40;
+    v30 = wh-10;
     v31 = 50 - x(sr31) +5 -0.5 * (50 - y(sr31)) + 0.5*(y(sr31) - 43); 
-    v32 = 30;
+    v32 = wh-20;
 
     result = zeros(size(x));
     result(region1) = value1;
