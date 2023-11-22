@@ -11,7 +11,7 @@
 function [x_updated, v_updated, q_updated] = update(x, v, dt, g, U, e, q)
 
     %Update the velocity field
-    v_updated = v + 0.05 * g(x, q) + U(x, e);
+    v_updated = v + 0.0 * g(x, q) + U(x, e);
 
     %Update the positions
     x_updated = x + dt * v_updated;
