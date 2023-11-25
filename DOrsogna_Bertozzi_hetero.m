@@ -9,21 +9,21 @@
 function u = DOrsogna_Bertozzi_hetero(x, y, qx, qy)
     % Set up the parameters; TO BE FINE TUNED
     Ca = 1;
-    Cr = 6 * Ca;                % Set the ratio of 
-    LA = 48;
-    LR = 24;
-    R = 36;
+    Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion
+    LA = 12;
+    LR = 6;
+    R = 10;
 
 
-    u = zeros(size(x, 1));
+    u = zeros(size(x));
     for i=1:size(x, 1)
         for j=1:size(y, 1)
             dist = norm(x(i, :)-y(j, :));
-            if dist <= R
-                temp = (Ca * exp(-dist/LA) + Cr * exp(-dist/LR))/dist;
+            if dist <= R && dist ~=0
+                temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
                 % Add the emotional effect
                 if nargin > 2
-                    temp = temp / (1 + qy(j) - qx(i));
+                    temp = temp / (2 + qy(j) - qx(i));
                 end
                 u(i, :) = u(i, :) + temp * (x(i, :)-y(j, :));
             end

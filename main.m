@@ -1,16 +1,28 @@
 clear all
 
-% Randomly initialize (for now homogeneous agents) in the plot.
-N = 50;                                       %Number of agents
+% Randomly initialize people in the plot.
+N = 50;                                       %Number of people
 x = rand(N, 1) .* 10 + 1;
 y = rand(N, 1) .* 30 + 10;
 X = zeros(N, 2);
 X(:, 1) = x;
 X(:, 2) = y;
 
+% Randomly initialize cars in the plot; cars are assumed to be initializd
+% on the road
+M = 10;                                       %Number of cars
+x = rand(M, 1) .* 10 + 1;
+y1 = rand(M/2, 1) .* 5 + 10;
+y2 = rand(M/2, 1) .* 5 + 35;
+y = cat(1, y1, y2);
+Y = zeros(M, 2);
+Y(:, 1) = x;
+Y(:, 2) = y;
+
 
 %Initialize velocity of the agents to be zero
 V = zeros(N, 2);
+W = zeros(M, 2);
 
 %All possible exits; the road has y-coordinates 10-15 and 35-40
 % e = [50 12.5; 50 37.5];
@@ -22,18 +34,36 @@ y_coord = cat(1, y_coord1, y_coord2);
 e = cat(2, x_coord, y_coord);
 
 %Specify the initial emotions of the agents
-q = zeros(N);
+qx = zeros(N);
+qy = zeros(M);
 for i=1:N
     if X(i, 1) > 10
-        q(i) = 1;
+        qx(i) = 1;
     else
-        q(i) = 0;
+        qx(i) = 0;
+    end
+end
+for i=1:M
+    if Y(i, 1) > 10
+        qy(i) = 1;
+    else
+        qy(i) = 0;
     end
 end
 
 
+% q = zeros(N);
+% for i=1:N
+%     if X(i, 1) > 10
+%         q(i) = 1;
+%     else
+%         q(i) = 0;
+%     end
+% end
+
+
 T = 10;                 %Maximum time
-iter_num = 70;
+iter_num = 500;
 t = linspace(0, T, iter_num);
 % scatter(X(:, 1), X(:, 2))
 % xlim([0 50])
@@ -43,13 +73,24 @@ t = linspace(0, T, iter_num);
 all_X = zeros(iter_num, N, 2);
 
 for i=1:iter_num
-    [X, V, q] = update(X, V, T/iter_num, @DOrsogna_Bertozzi_homo, @potential, e, q);
+    %Homogeneous case update
+%     [X, V, q] = update(X, V, T/iter_num, @DOrsogna_Bertozzi_homo, @potential, e, q);
 %     [X, V] = update(X, V, T/iter_num, @Cucker_Smale_homo, @potential, e, q);
+
+
+    %Heterogeneous case update
+    [X, Y, V, W, qx, qy] = update(X, Y, V, W, T/iter_num, @DOrsogna_Bertozzi_homo, @DOrsogna_Bertozzi_hetero, @potential, e, qx, qy);
+
+
+
 
 %     all_X(i,:,:) = X;
 % 
 % 
     scatter(X(:, 1), X(:, 2), 15, 'blue', "filled")
+    hold on
+    scatter(Y(:, 1), Y(:, 2), 30, 'red')
+    hold off
 
     %Lower Road
     yline(10);
@@ -72,15 +113,7 @@ for i=1:iter_num
     ylim([0 50])
     title(sprintf("iter num = %d", i))
 %     hold off
-    pause(0.2)
+    pause(0.01)
 end
-
-
-
-
-
-
-
-
 
 

@@ -6,10 +6,10 @@ function U = potential(x, e)
     U2 = rand;
 
     % Weight in the hill function h(x)=x/(c0+x)
-    c0 = 5;
+    c0 = 30;
 
     % Weight of the local best position and the global best position.
-    c1 = 0.5;
+    c1 = 2;
     c2 = 1;
 
 
@@ -21,7 +21,7 @@ function U = potential(x, e)
 
         for j=1:size(e, 1)
            dist = norm(e(j, :)-x(i, :));
-           if dist < min_dist
+           if dist < min_dist && dist ~= 0
                min_dist = dist;
                global_optimal = e(j, :);
            end
