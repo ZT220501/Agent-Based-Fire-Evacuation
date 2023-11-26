@@ -10,7 +10,7 @@ X(:, 2) = y;
 
 % Randomly initialize cars in the plot; cars are assumed to be initializd
 % on the road
-M = 10;                                       %Number of cars
+M = 20;                                       %Number of cars
 x = rand(M, 1) .* 10 + 1;
 y1 = rand(M/2, 1) .* 5 + 10;
 y2 = rand(M/2, 1) .* 5 + 35;
@@ -113,7 +113,25 @@ for i=1:iter_num
     ylim([0 50])
     title(sprintf("iter num = %d", i))
 %     hold off
-    pause(0.01)
+    pause(0.05)
+
+
+    can_break = true;
+    for j=1:size(X ,1)
+        if X(j, 1) < 50
+            can_break = false;
+        end
+    end
+    for j=1:size(Y ,1)
+        if Y(j, 1) < 50
+            can_break = false;
+        end
+    end
+    if can_break == true
+        disp(i);
+        break;
+    end
+    
 end
 
 
