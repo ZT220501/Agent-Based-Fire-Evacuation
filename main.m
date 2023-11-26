@@ -79,7 +79,7 @@ for i=1:iter_num
 
 
     %Heterogeneous case update
-    [X, Y, V, W, qx, qy] = update(X, Y, V, W, T/iter_num, @DOrsogna_Bertozzi_homo, @DOrsogna_Bertozzi_hetero, @potential, e, qx, qy);
+    [X, Y, V, W, qx, qy] = update(X, Y, V, W, T/iter_num, @DOrsogna_Bertozzi_homo, @DOrsogna_Bertozzi_homo_2, @DOrsogna_Bertozzi_hetero, @DOrsogna_Bertozzi_hetero_2, @potential, e, qx, qy);
 
 
 

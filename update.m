@@ -8,7 +8,7 @@
 
 
 %Update function for heterogeneous agents with emotion
-function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = update(x, y, v, w, dt, g_homo, g_hetero, U, e, qx, qy)
+function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = update(x, y, v, w, dt, g_homo, g_homo_2, g_hetero, g_hetero_2, U, e, qx, qy)
 
 
     %Set a limiting speed
@@ -17,6 +17,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
 
     %Weight for attraction-repulsion terms
     ar_weight = 0.8;
+    % ar_weight = 0;
 
     %Update the velocity field of people according to the limiting speed
     v_updated = v - ar_weight* g_homo(x, qx) - ar_weight * g_hetero(x, y, qx, qy) + U(x, e, 50);
@@ -31,7 +32,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
 
 
     %Update the velocity field of cars according to the limiting speed
-    w_updated = w - ar_weight * g_homo(y, qy) - ar_weight * g_hetero(y, x, qy, qx) + U(y, e, 20);
+    w_updated = w - ar_weight * g_homo_2(y, qy) - ar_weight * g_hetero_2(y, x, qy, qx) + U(y, e, 20);
     for i=1:size(y, 1)
         if norm(w_updated(i, :)) > w_max
             w_updated(i, :) = w_updated(i, :) * w_max/norm(w_updated(i, :));
