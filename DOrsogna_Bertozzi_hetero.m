@@ -21,6 +21,9 @@ function u = DOrsogna_Bertozzi_hetero(x, y, qx, qy)
             dist = norm(x(i, :)-y(j, :));
             if dist <= R && dist ~=0
                 temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
+                if dist <= R/5
+                    temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^12)/dist;
+                end
                 % Add the emotional effect
                 if nargin > 2
                     temp = temp / (1.5 + qy(j) - qx(i));
