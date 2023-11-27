@@ -7,6 +7,7 @@
 % updated, and y represents the kind of agent that provides effects.
 % qx is the emotion of the x agents; qy is the emotion of the y agents.
 function u = DOrsogna_Bertozzi_hetero(x, y, qx, qy)
+    % car on human
     % Set up the parameters; TO BE FINE TUNED
     Ca = 1;
     Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion

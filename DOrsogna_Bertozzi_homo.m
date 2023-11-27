@@ -5,6 +5,7 @@
 % x is a n*2 matrix where n is the number of agents; x(i, :) is the
 % position of an agent.
 function u = DOrsogna_Bertozzi_homo(x, q)
+    % human on human
     % Set up the parameters; TO BE FINE TUNED
     Ca = 1;
     Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion
