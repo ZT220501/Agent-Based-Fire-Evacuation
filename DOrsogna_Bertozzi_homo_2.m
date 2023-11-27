@@ -6,6 +6,7 @@
 % position of an agent.
 function u = DOrsogna_Bertozzi_homo_2(x, q)
     % car on car
+
     % Set up the parameters; TO BE FINE TUNED
     Ca = 0.2;
     Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion
@@ -20,6 +21,9 @@ function u = DOrsogna_Bertozzi_homo_2(x, q)
                 dist = norm(x(i, :)-x(j, :));
                 if dist <= R && dist ~= 0
                     temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
+                    if dist <= R/2
+                        temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^5)/dist;
+                    end
                     % Add the emotional effect
                     if nargin > 1
                         temp = temp / (1.5 + q(j) - q(i));

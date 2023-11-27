@@ -8,6 +8,7 @@
 % qx is the emotion of the x agents; qy is the emotion of the y agents.
 function u = DOrsogna_Bertozzi_hetero(x, y, qx, qy)
     % car on human
+
     % Set up the parameters; TO BE FINE TUNED
     Ca = 1;
     Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion
@@ -22,8 +23,8 @@ function u = DOrsogna_Bertozzi_hetero(x, y, qx, qy)
             dist = norm(x(i, :)-y(j, :));
             if dist <= R && dist ~=0
                 temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
-                if dist <= R/5
-                    temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^12)/dist;
+                if dist <= R/2
+                    temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^5)/dist;
                 end
                 % Add the emotional effect
                 if nargin > 2

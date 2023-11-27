@@ -6,6 +6,7 @@
 % position of an agent.
 function u = DOrsogna_Bertozzi_homo(x, q)
     % human on human
+    
     % Set up the parameters; TO BE FINE TUNED
     Ca = 1;
     Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion

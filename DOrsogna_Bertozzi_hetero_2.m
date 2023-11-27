@@ -8,6 +8,7 @@
 % qx is the emotion of the x agents; qy is the emotion of the y agents.
 function u = DOrsogna_Bertozzi_hetero_2(x, y, qx, qy)
     % human on car
+
     % Set up the parameters; TO BE FINE TUNED
     Ca = 0.1;
     Cr = 0.15;                % Set the ratio of attraction and repulsion
