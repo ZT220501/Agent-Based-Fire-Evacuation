@@ -70,6 +70,17 @@ t = linspace(0, T, iter_num);
 % ylim([0 50])
 % pause(0.2)
 
+% street layout
+f = @(a1, a2) piecewiseFunction(a1, a2);
+[xs, ys] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
+zs = f(xs, ys);
+[gradX, gradY] = gradient(zs,50/200,50/200);
+grad_norm = (gradX.^2 + gradY.^2).^(0.5);
+layout_ind = find(grad_norm>25.0);
+[layout_i, layout_j] = ind2sub(size(zs), layout_ind);
+layout_y = layout_i * 50/200;
+layout_x = layout_j * 50/200;
+
 all_X = zeros(iter_num, N, 2);
 
 for i=1:iter_num
@@ -87,8 +98,12 @@ for i=1:iter_num
 %     all_X(i,:,:) = X;
 % 
 % 
-    scatter(X(:, 1), X(:, 2), 15, 'blue', "filled")
+    % street layout
+    scatter(layout_x, layout_y, 1, 'magenta')
     hold on
+
+    scatter(X(:, 1), X(:, 2), 15, 'blue', "filled")
+    % hold on
     scatter(Y(:, 1), Y(:, 2), 30, 'red')
     hold off
 
@@ -99,6 +114,8 @@ for i=1:iter_num
     %Upper Road
     yline(35);
     yline(40);
+
+    
 %     
 %     for j = 1:N
 %         plot(all_X(1:i,j,1), all_X(1:i,j,2), 'Color', [0.3010 0.7450 0.9330]);
