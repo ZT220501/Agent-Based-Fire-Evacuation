@@ -27,16 +27,48 @@ function result = pw(x, y)
     result(region6) = value6;
 
     % center = [10, 5];
-    for i = [10 20 30 40]
+    for i = [10 25 40]
         center = [i, 5];
         L_inf_norm = max(abs(x - center(1)), abs(y - center(2)));
         L_inf_norm_min = 2;
-        L_inf_norm_max = 3;
+        L_inf_norm_max = 3.5;
         sr1 = L_inf_norm > L_inf_norm_min & L_inf_norm < L_inf_norm_max;
         sr1((y > L_inf_norm_min + center(2)) & (y < L_inf_norm_max + center(2))) = false;
-        v1 = 50 - x +5 -slope * y+70-10*L_inf_norm;
+        v1 = 50 - x +5 -slope * y+70-20*L_inf_norm;
         result(sr1) = v1(sr1);
     end
 
+    for i = [10 25 40]
+        center = [i, 20];
+        L_inf_norm = max(abs(x - center(1)), abs(y - center(2)));
+        L_inf_norm_min = 2;
+        L_inf_norm_max = 3.5;
+        sr1 = L_inf_norm > L_inf_norm_min & L_inf_norm < L_inf_norm_max;
+        sr1((y < - L_inf_norm_min + center(2)) & (y > - L_inf_norm_max + center(2))) = false;
+        v1 = 50 - x +5 -slope * (25 - y)+70-20*L_inf_norm;
+        result(sr1) = v1(sr1);
+    end
+
+    for i = [10 25 40]
+        center = [i, 30];
+        L_inf_norm = max(abs(x - center(1)), abs(y - center(2)));
+        L_inf_norm_min = 2;
+        L_inf_norm_max = 3.5;
+        sr1 = L_inf_norm > L_inf_norm_min & L_inf_norm < L_inf_norm_max;
+        sr1((y > L_inf_norm_min + center(2)) & (y < L_inf_norm_max + center(2))) = false;
+        v1 = 50 - x +5 -slope * (y - 25)+70-20*L_inf_norm;
+        result(sr1) = v1(sr1);
+    end
+
+    for i = [10 25 40]
+        center = [i, 45];
+        L_inf_norm = max(abs(x - center(1)), abs(y - center(2)));
+        L_inf_norm_min = 2;
+        L_inf_norm_max = 3.5;
+        sr1 = L_inf_norm > L_inf_norm_min & L_inf_norm < L_inf_norm_max;
+        sr1((y < center(2)- L_inf_norm_min) & (y > - L_inf_norm_max + center(2))) = false;
+        v1 = 50 - x +5 -slope * (50 - y)+70-20*L_inf_norm;
+        result(sr1) = v1(sr1);
+    end
     
 end
