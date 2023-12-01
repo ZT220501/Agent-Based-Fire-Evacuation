@@ -72,16 +72,26 @@ t = linspace(0, T, iter_num);
 % pause(0.2)
 
 % street layout
-f = @(a1, a2) piecewiseFunction(a1, a2);
-[xs, ys] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
-zs = f(xs, ys);
-[gradX, gradY] = gradient(zs,50/200,50/200);
-grad_norm = (gradX.^2 + gradY.^2).^(0.5);
+% f = @(a1, a2) piecewiseFunction(a1, a2);
+% [xs, ys] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
+% zs = f(xs, ys);
+% [gradX, gradY] = gradient(zs,50/200,50/200);
+% grad_norm = (gradX.^2 + gradY.^2).^(0.5);
 % layout_ind = find(grad_norm>25.0);
-layout_ind = find(grad_norm>25.0);
-[layout_i, layout_j] = ind2sub(size(zs), layout_ind);
-layout_y = layout_i * 50/200;
-layout_x = layout_j * 50/200;
+% layout_ind = find(grad_norm>50.0);
+% [layout_i, layout_j] = ind2sub(size(zs), layout_ind);
+% layout_y = layout_i * 50/200;
+% layout_x = layout_j * 50/200;
+
+center_x = [10, 25, 40];
+center_y = [5, 20, 30, 45];
+side_length = 2;
+wall_x1 = center_x - side_length;
+wall_x2 = center_x + side_length;
+wall_y1 = center_y - side_length;
+wall_y2 = center_y + side_length;
+wall_color = "cyan";
+wall_thickness = 2;
 
 all_X = zeros(iter_num, N, 2);
 
@@ -94,20 +104,32 @@ for i=1:iter_num
     %Heterogeneous case update
     [X, Y, V, W, qx, qy] = update(X, Y, V, W, T/iter_num, @DOrsogna_Bertozzi_homo, @DOrsogna_Bertozzi_homo_2, @DOrsogna_Bertozzi_hetero, @DOrsogna_Bertozzi_hetero_2, @potential, e, qx, qy);
 
-
-
-
 %     all_X(i,:,:) = X;
 % 
 % 
     % street layout
-    scatter(layout_x, layout_y, 1, 'magenta')
-    hold on
+    % scatter(layout_x, layout_y, 1, 'magenta')
 
     scatter(X(:, 1), X(:, 2), 10, 'blue', "filled")
-    % hold on
+    hold on
     scatter(Y(:, 1), Y(:, 2), 20, 'red')
     hold off
+
+    
+    for wi = 1:length(center_x)
+        for wj = 1:length(center_y)
+            if ~any([7,18,32,43] == wall_y1(wj))
+                line([wall_x1(wi), wall_x2(wi)], [wall_y1(wj), wall_y1(wj)], "Color", wall_color, 'LineWidth', wall_thickness);
+            end
+            if ~any([7,18,32,43] == wall_y2(wj))
+                line([wall_x1(wi), wall_x2(wi)], [wall_y2(wj), wall_y2(wj)], "Color", wall_color, 'LineWidth', wall_thickness);
+            end
+
+            line([wall_x1(wi), wall_x1(wi)], [wall_y1(wj), wall_y2(wj)], "Color", wall_color, 'LineWidth', wall_thickness);
+            line([wall_x2(wi), wall_x2(wi)], [wall_y1(wj), wall_y2(wj)], "Color", wall_color, 'LineWidth', wall_thickness);
+        end
+    end
+
 
     %Lower Road
     yline(10);
@@ -116,7 +138,11 @@ for i=1:iter_num
     %Upper Road
     yline(35);
     yline(40);
+    
 
+    
+
+    
     
 %     
 %     for j = 1:N
