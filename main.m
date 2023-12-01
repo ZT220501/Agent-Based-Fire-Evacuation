@@ -1,8 +1,9 @@
 clear all
 
 % Randomly initialize people in the plot.
+% Initialize so that some people are inside the buildings
 N = 50;                                       %Number of people
-x = rand(N, 1) .* 10 + 1;
+x = rand(N, 1) .* 4 + 1;
 y = rand(N, 1) .* 30 + 10;
 X = zeros(N, 2);
 X(:, 1) = x;
@@ -102,9 +103,9 @@ for i=1:iter_num
     scatter(layout_x, layout_y, 1, 'magenta')
     hold on
 
-    scatter(X(:, 1), X(:, 2), 15, 'blue', "filled")
+    scatter(X(:, 1), X(:, 2), 10, 'blue', "filled")
     % hold on
-    scatter(Y(:, 1), Y(:, 2), 30, 'red')
+    scatter(Y(:, 1), Y(:, 2), 20, 'red')
     hold off
 
     %Lower Road
