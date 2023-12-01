@@ -1,4 +1,4 @@
-f = @(x, y) pw(x, y);
+f = @(x, y) piecewiseFunction(x, y);
 [x, y] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
 % sr1 = (x > 8 & x < 12 & y > 3 & y < 7);
 % sr3 = (x > 18 & x < 22 & y > 3 & y < 7);

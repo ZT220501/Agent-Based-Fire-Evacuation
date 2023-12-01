@@ -72,16 +72,16 @@ t = linspace(0, T, iter_num);
 % pause(0.2)
 
 % street layout
-% f = @(a1, a2) piecewiseFunction(a1, a2);
-% [xs, ys] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
-% zs = f(xs, ys);
-% [gradX, gradY] = gradient(zs,50/200,50/200);
-% grad_norm = (gradX.^2 + gradY.^2).^(0.5);
+f = @(a1, a2) piecewiseFunction(a1, a2);
+[xs, ys] = meshgrid(linspace(0, 50, 200), linspace(0, 50, 200));
+zs = f(xs, ys);
+[gradX, gradY] = gradient(zs,50/200,50/200);
+grad_norm = (gradX.^2 + gradY.^2).^(0.5);
 % layout_ind = find(grad_norm>25.0);
-% layout_ind = find(grad_norm>50.0);
-% [layout_i, layout_j] = ind2sub(size(zs), layout_ind);
-% layout_y = layout_i * 50/200;
-% layout_x = layout_j * 50/200;
+layout_ind = find(grad_norm>25.0);
+[layout_i, layout_j] = ind2sub(size(zs), layout_ind);
+layout_y = layout_i * 50/200;
+layout_x = layout_j * 50/200;
 
 center_x = [10, 25, 40];
 center_y = [5, 20, 30, 45];
@@ -107,12 +107,15 @@ for i=1:iter_num
 %     all_X(i,:,:) = X;
 % 
 % 
-    % street layout
-    % scatter(layout_x, layout_y, 1, 'magenta')
+    
 
     scatter(X(:, 1), X(:, 2), 10, 'blue', "filled")
     hold on
     scatter(Y(:, 1), Y(:, 2), 20, 'red')
+
+    % street layout
+    scatter(layout_x, layout_y, 1, 'magenta')
+
     hold off
 
     

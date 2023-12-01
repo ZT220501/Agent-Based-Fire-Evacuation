@@ -34,7 +34,7 @@ function result = piecewiseFunction(x, y)
 
     repulsion_length = 1.5; % max = 2, the side of a house
     l_inf_min_o = 2; % region of repulsion outside wall
-    l_inf_max_o = l_inf_min_o + repulsion_length; 
+    l_inf_max_o = l_inf_min_o + 3; 
     l_inf_max_i = l_inf_min_o;
     l_inf_min_i = l_inf_max_i - repulsion_length; % region of repulsion inside wall 
     wall_slope = wall_height / (l_inf_max_o - l_inf_min_o);
