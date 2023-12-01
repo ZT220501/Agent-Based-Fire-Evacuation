@@ -12,11 +12,11 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
 
 
     %Set a limiting speed
-    v_max = 20;
-    w_max = 60;
+    v_max = 5;
+    w_max = 10;
 
     %Weight for attraction-repulsion terms
-    ar_weight = 0.8;
+    ar_weight = 0.5;
     % ar_weight = 0;
 
     %Update the velocity field of people according to the limiting speed

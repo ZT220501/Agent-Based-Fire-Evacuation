@@ -21,7 +21,7 @@ function u = DOrsogna_Bertozzi_homo_2(x, q)
                 dist = norm(x(i, :)-x(j, :));
                 if dist <= R && dist ~= 0
                     temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
-                    if dist <= R/2
+                    if dist <= R/5
                         temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^6)/dist;
                     end
                     % Add the emotional effect

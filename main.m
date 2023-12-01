@@ -2,7 +2,7 @@ clear all
 
 % Randomly initialize people in the plot.
 % Initialize so that some people are inside the buildings
-N = 50;                                       %Number of people
+N = 30;                                       %Number of people
 x = rand(N, 1) .* 4 + 1;
 y = rand(N, 1) .* 30 + 10;
 X = zeros(N, 2);
@@ -11,7 +11,7 @@ X(:, 2) = y;
 
 % Randomly initialize cars in the plot; cars are assumed to be initializd
 % on the road
-M = 20;                                       %Number of cars
+M = 30;                                       %Number of cars
 x = rand(M, 1) .* 10 + 1;
 y1 = rand(M/2, 1) .* 5 + 10;
 y2 = rand(M/2, 1) .* 5 + 35;
@@ -63,8 +63,8 @@ end
 % end
 
 
-T = 10;                 %Maximum time
-iter_num = 500;
+T = 100;                 %Maximum time
+iter_num = 5000;
 t = linspace(0, T, iter_num);
 % scatter(X(:, 1), X(:, 2))
 % xlim([0 50])
@@ -77,6 +77,7 @@ f = @(a1, a2) piecewiseFunction(a1, a2);
 zs = f(xs, ys);
 [gradX, gradY] = gradient(zs,50/200,50/200);
 grad_norm = (gradX.^2 + gradY.^2).^(0.5);
+% layout_ind = find(grad_norm>25.0);
 layout_ind = find(grad_norm>25.0);
 [layout_i, layout_j] = ind2sub(size(zs), layout_ind);
 layout_y = layout_i * 50/200;
@@ -131,7 +132,7 @@ for i=1:iter_num
     ylim([0 50])
     title(sprintf("iter num = %d", i))
 %     hold off
-    pause(0.05)
+    pause(0.01)
 
 
     can_break = true;

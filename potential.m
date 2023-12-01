@@ -12,7 +12,7 @@ function U = potential(x, e, c0)
 
     % Weight of the local best position and the global best position.
     c1 = 2;
-    c2 = 1;
+    c2 = 1.8;
 
 
 
