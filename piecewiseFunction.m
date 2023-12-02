@@ -11,7 +11,7 @@ function result = piecewiseFunction(x, y)
     max_plane_height = slope*10; % hightest difference on the plane
     max_road_height = 80; % highest point on a road
     k = max_road_height / 50;
-    wall_height = 80; % wall height
+    wall_height = 100000000; % wall height
 
     value1 = max_road_height - k*x(region1) +max_plane_height -slope * y(region1);
     value2 = max_road_height - k*x(region2);
@@ -34,7 +34,7 @@ function result = piecewiseFunction(x, y)
 
     repulsion_length = 1.5; % max = 2, the side of a house
     l_inf_min_o = 2; % region of repulsion outside wall
-    l_inf_max_o = l_inf_min_o + 3; 
+    l_inf_max_o = l_inf_min_o + repulsion_length; 
     l_inf_max_i = l_inf_min_o;
     l_inf_min_i = l_inf_max_i - repulsion_length; % region of repulsion inside wall 
     wall_slope = wall_height / (l_inf_max_o - l_inf_min_o);

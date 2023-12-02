@@ -9,10 +9,10 @@ function u = DOrsogna_Bertozzi_homo_2(x, q)
 
     % Set up the parameters; TO BE FINE TUNED
     Ca = 0.2;
-    Cr = 2 * Ca;                % Set the ratio of attraction and repulsion
+    Cr = 1.5;                % Set the ratio of attraction and repulsion
     LA = 12;
     LR = 6;
-    R = 10;
+    R = 15;
 
     u = zeros(size(x));
     for i=1:size(x, 1)
@@ -21,8 +21,8 @@ function u = DOrsogna_Bertozzi_homo_2(x, q)
                 dist = norm(x(i, :)-x(j, :));
                 if dist <= R && dist ~= 0
                     temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;
-                    if dist <= R/5
-                        temp = (Ca * exp(-dist/LA) - Cr * 1 / dist^6)/dist;
+                    if dist <= R/3
+                        temp = (0 * exp(-dist/LA) - Cr * 1 / dist^6)/dist;
                     end
                     % Add the emotional effect
                     if nargin > 1

@@ -1,13 +1,42 @@
 clear all
 
 % Randomly initialize people in the plot.
-% Initialize so that some people are inside the buildings
-N = 30;                                       %Number of people
-x = rand(N, 1) .* 4 + 1;
-y = rand(N, 1) .* 30 + 10;
-X = zeros(N, 2);
+% Initialize the amount of people outside of the buildings
+N1 = 30;                        %Number of people outside of the buildings
+N2 = 3;                    %Number of people inside each of the 12 buildings
+building_num = 12;
+N = N1 + N2 * building_num;
+
+
+x = rand(N1, 1) .* 4 + 1;
+y = rand(N1, 1) .* 30 + 10;
+X = zeros(N1, 2);
 X(:, 1) = x;
 X(:, 2) = y;
+
+
+%Specify the house positions
+center_x = [10, 25, 40];
+center_y = [5, 20, 30, 45];
+side_length = 2;
+wall_x1 = center_x - side_length;
+wall_x2 = center_x + side_length;
+wall_y1 = center_y - side_length;
+wall_y2 = center_y + side_length;
+wall_color = "cyan";
+wall_thickness = 1;
+
+for i = 1:length(center_x)
+    for j = 1:length(center_y)
+        x = rand(N2, 1) .* side_length + wall_x1(i);
+        y = rand(N2, 1) .* side_length + wall_y1(j);
+        X_temp = zeros(N2, 2);
+        X_temp(:, 1) = x;
+        X_temp(:, 2) = y;
+        X = cat(1, X, X_temp);
+    end
+end
+
 
 % Randomly initialize cars in the plot; cars are assumed to be initializd
 % on the road
@@ -53,16 +82,6 @@ for i=1:M
 end
 
 
-% q = zeros(N);
-% for i=1:N
-%     if X(i, 1) > 10
-%         q(i) = 1;
-%     else
-%         q(i) = 0;
-%     end
-% end
-
-
 T = 100;                 %Maximum time
 iter_num = 5000;
 t = linspace(0, T, iter_num);
@@ -77,21 +96,13 @@ f = @(a1, a2) piecewiseFunction(a1, a2);
 zs = f(xs, ys);
 [gradX, gradY] = gradient(zs,50/200,50/200);
 grad_norm = (gradX.^2 + gradY.^2).^(0.5);
-% layout_ind = find(grad_norm>25.0);
 layout_ind = find(grad_norm>25.0);
+% layout_ind = find(grad_norm>50.0);
 [layout_i, layout_j] = ind2sub(size(zs), layout_ind);
 layout_y = layout_i * 50/200;
 layout_x = layout_j * 50/200;
 
-center_x = [10, 25, 40];
-center_y = [5, 20, 30, 45];
-side_length = 2;
-wall_x1 = center_x - side_length;
-wall_x2 = center_x + side_length;
-wall_y1 = center_y - side_length;
-wall_y2 = center_y + side_length;
-wall_color = "cyan";
-wall_thickness = 2;
+
 
 all_X = zeros(iter_num, N, 2);
 
@@ -107,15 +118,12 @@ for i=1:iter_num
 %     all_X(i,:,:) = X;
 % 
 % 
-    
+    % street layout
+    scatter(layout_x, layout_y, 1, 'magenta')
 
     scatter(X(:, 1), X(:, 2), 10, 'blue', "filled")
     hold on
     scatter(Y(:, 1), Y(:, 2), 20, 'red')
-
-    % street layout
-    scatter(layout_x, layout_y, 1, 'magenta')
-
     hold off
 
     

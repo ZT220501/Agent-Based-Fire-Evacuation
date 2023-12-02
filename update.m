@@ -12,12 +12,11 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
 
 
     %Set a limiting speed
-    v_max = 5;
-    w_max = 10;
+    v_max = 7;
+    w_max = 14;
 
     %Weight for attraction-repulsion terms
     ar_weight = 0.5;
-    % ar_weight = 0;
 
     %Update the velocity field of people according to the limiting speed
     v_updated = v - ar_weight* g_homo(x, qx) - ar_weight * g_hetero(x, y, qx, qy) + U(x, e, 50);
@@ -26,7 +25,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
             v_updated(i, :) = v_updated(i, :) * v_max/norm(v_updated(i, :));
         end
         if v_updated(i, 1) < 0
-            v_updated(i, 1) = 0.001;
+            v_updated(i, 1) = 0.1;
         end
     end
 
@@ -38,34 +37,23 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
             w_updated(i, :) = w_updated(i, :) * w_max/norm(w_updated(i, :));
         end
         if w_updated(i, 1) < 0
-            w_updated(i, 1) = 0.001;
+            w_updated(i, 1) = 0.1;
         end
     end
-
-%     if norm(v) ~= 0
-%         v_updated = v/norm(v) + 0.0 * g_homo(x, qx) + 0.0 * g_hetero(x, y, qx, qy) + U(x, e);
-%     else
-%         v_updated = v + 0.0 * g_homo(x, qx) + 0.0 * g_hetero(x, y, qx, qy) + U(x, e);
-%     end
-%     if norm(w) ~= 0
-%         w_updated = w/norm(w) + 0.0 * g_homo(y, qy) + 0.0 * g_hetero(y, x, qy, qx) + U(y, e);
-%     else
-%         w_updated = w + 0.0 * g_homo(y, qy) + 0.0 * g_hetero(y, x, qy, qx) + U(y, e);
-%     end
 
     %Update the positions for people
     x_updated = x + dt * v_updated;
 
     %Update the position for cars
-%     y_updated = y + dt * w_updated;
-
     y_updated = zeros(size(y));
     for i=1:size(y, 1)
         temp = y(i, :) + dt * w_updated(i, :);
         %If the car is going to go out of the current road, make sure it
         %stays on the road
         if temp(1, 2) < 10 || (temp(1, 2) > 15 && temp(1, 2) < 35) || temp(1, 2) > 40
-            temp(1, 2) = y(i, 2);
+            w_updated(i, 1) = norm(w_updated(i, :));
+            w_updated(i, 2) = 0;
+            temp = y(i, :) + dt * w_updated(i, :);
         end
         y_updated(i, :) = temp;
     end
