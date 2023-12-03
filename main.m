@@ -3,7 +3,7 @@ clear all
 % Randomly initialize people in the plot.
 % Initialize the amount of people outside of the buildings
 N1 = 30;                        %Number of people outside of the buildings
-N2 = 3;                    %Number of people inside each of the 12 buildings
+N2 = 5;                    %Number of people inside each of the 12 buildings
 building_num = 12;
 N = N1 + N2 * building_num;
 
@@ -28,8 +28,8 @@ wall_thickness = 1;
 
 for i = 1:length(center_x)
     for j = 1:length(center_y)
-        x = rand(N2, 1) .* side_length + wall_x1(i);
-        y = rand(N2, 1) .* side_length + wall_y1(j);
+        x = rand(N2, 1) .* side_length/2 + wall_x1(i) + 0.5;
+        y = rand(N2, 1) .* side_length/2 + wall_y1(j) + 0.5;
         X_temp = zeros(N2, 2);
         X_temp(:, 1) = x;
         X_temp(:, 2) = y;
@@ -40,7 +40,7 @@ end
 
 % Randomly initialize cars in the plot; cars are assumed to be initializd
 % on the road
-M = 30;                                       %Number of cars
+M = 50;                                       %Number of cars
 x = rand(M, 1) .* 10 + 1;
 y1 = rand(M/2, 1) .* 5 + 10;
 y2 = rand(M/2, 1) .* 5 + 35;
@@ -85,10 +85,7 @@ end
 T = 100;                 %Maximum time
 iter_num = 5000;
 t = linspace(0, T, iter_num);
-% scatter(X(:, 1), X(:, 2))
-% xlim([0 50])
-% ylim([0 50])
-% pause(0.2)
+
 
 % street layout
 f = @(a1, a2) piecewiseFunction(a1, a2);
@@ -121,9 +118,9 @@ for i=1:iter_num
     % street layout
     scatter(layout_x, layout_y, 1, 'magenta')
 
-    scatter(X(:, 1), X(:, 2), 10, 'blue', "filled")
+    scatter(X(:, 1), X(:, 2), 8, 'blue', "filled")
     hold on
-    scatter(Y(:, 1), Y(:, 2), 20, 'red')
+    scatter(Y(:, 1), Y(:, 2), 15, 'red')
     hold off
 
     
@@ -143,12 +140,12 @@ for i=1:iter_num
 
 
     %Lower Road
-    yline(10);
-    yline(15);
+    yline(10, "Linewidth", 1);
+    yline(15, "Linewidth", 1);
 
     %Upper Road
-    yline(35);
-    yline(40);
+    yline(35, "Linewidth", 1);
+    yline(40, "Linewidth", 1);
     
 
     

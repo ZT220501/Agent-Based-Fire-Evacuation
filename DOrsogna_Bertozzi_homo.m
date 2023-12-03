@@ -8,8 +8,8 @@ function u = DOrsogna_Bertozzi_homo(x, q)
     % human on human
     
     % Set up the parameters; TO BE FINE TUNED
-    Ca = 1;
-    Cr = 1.5 * Ca;                % Set the ratio of attraction and repulsion
+    Ca = 0.8;
+    Cr = 1.5;                % Set the ratio of attraction and repulsion
     LA = 12;
     LR = 6;
     R = 10;
@@ -17,7 +17,7 @@ function u = DOrsogna_Bertozzi_homo(x, q)
     u = zeros(size(x));
     for i=1:size(x, 1)
         for j=1:size(x, 1)
-            if j ~= i
+            if j ~= i && x(j, 1) < 50
                 dist = norm(x(i, :)-x(j, :));
                 if dist <= R && dist ~= 0
                     temp = (Ca * exp(-dist/LA) - Cr * exp(-dist/LR))/dist;

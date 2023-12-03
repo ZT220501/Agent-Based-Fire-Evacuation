@@ -11,7 +11,7 @@ function result = piecewiseFunction(x, y)
     max_plane_height = slope*10; % hightest difference on the plane
     max_road_height = 80; % highest point on a road
     k = max_road_height / 50;
-    wall_height = 100000000; % wall height
+    wall_height = 1e20; % wall height
 
     value1 = max_road_height - k*x(region1) +max_plane_height -slope * y(region1);
     value2 = max_road_height - k*x(region2);

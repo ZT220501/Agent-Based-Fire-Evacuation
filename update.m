@@ -13,10 +13,10 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
 
     %Set a limiting speed
     v_max = 7;
-    w_max = 14;
+    w_max = 16;
 
     %Weight for attraction-repulsion terms
-    ar_weight = 0.5;
+    ar_weight = 0.8;
 
     %Update the velocity field of people according to the limiting speed
     v_updated = v - ar_weight* g_homo(x, qx) - ar_weight * g_hetero(x, y, qx, qy) + U(x, e, 50);
@@ -24,8 +24,11 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
         if norm(v_updated(i, :)) > v_max
             v_updated(i, :) = v_updated(i, :) * v_max/norm(v_updated(i, :));
         end
-        if v_updated(i, 1) < 0
-            v_updated(i, 1) = 0.1;
+%         if v_updated(i, 1) < 0
+%             v_updated(i, 1) = 0.1;
+%         end
+        if x(i, 1) > 50
+            v_updated(i, :) = zeros(1, 2);
         end
     end
 
@@ -37,7 +40,10 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
             w_updated(i, :) = w_updated(i, :) * w_max/norm(w_updated(i, :));
         end
         if w_updated(i, 1) < 0
-            w_updated(i, 1) = 0.1;
+            w_updated(i, 1) = 0.5;
+        end
+        if y(i, 1) > 50
+            w_updated(i,:) = zeros(1, 2);
         end
     end
 
