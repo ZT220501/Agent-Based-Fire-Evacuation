@@ -11,8 +11,8 @@ function U = potential(x, e, c0)
     end
 
     % Weight of the local best position and the global best position.
-    c1 = 4.5;
-    c2 = 4;
+    c1 = 7;
+    c2 = 7;
 
 
 
@@ -39,8 +39,7 @@ function U = potential(x, e, c0)
         grad_p = [grad_x(2), grad_y(2)];
 
 
-
-        U(i, :) = -c1 * U1 * grad_p/(norm(grad_p, 2) + c0) + c2 * U2 * global_optimal_dir / (norm(global_optimal_dir, 2) + c0);
+        U(i, :) = -c1 * U1 * grad_p/(norm(grad_p, 2) + c0) + c2 * (U2 + 0.5) * global_optimal_dir / (norm(global_optimal_dir, 2) + c0);
         
 
         

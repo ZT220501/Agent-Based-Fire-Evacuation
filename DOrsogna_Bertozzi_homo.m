@@ -8,7 +8,7 @@ function u = DOrsogna_Bertozzi_homo(x, q)
     % human on human
     
     % Set up the parameters; TO BE FINE TUNED
-    Ca = 0.8;
+    Ca = 1;
     Cr = 1.5;                % Set the ratio of attraction and repulsion
     LA = 12;
     LR = 6;

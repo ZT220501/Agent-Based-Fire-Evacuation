@@ -65,7 +65,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
     end
 
     %Update the emotions using the piecewise function g
-    beta = 1;
+    beta = 0.8;
     R = 10;
     
 
@@ -77,7 +77,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
         total_count = 0;
         for j=1:size(qx)
             dist = norm(x(i, :) - x(j, :));
-            if (dist < R) && dist ~= 0
+            if (dist < R) && dist ~= 0 && x(j, 1) < 50
                 total_count = total_count + 1;
                 diff = qx(i) - qx(j);
                 if diff > 0
@@ -103,7 +103,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
         total_count = 0;
         for j=1:size(qx)
             dist = norm(y(i, :) - x(j, :));
-            if dist < R && dist ~= 0
+            if dist < R && dist ~= 0 && x(j, 1) < 50
                 total_count = total_count + 1;
                 diff = qy(i) - qx(j);
                 if diff > 0
@@ -115,7 +115,7 @@ function [x_updated, y_updated, v_updated, w_updated, qx_updated, qy_updated] = 
         end
         for j=1:size(qy)
             dist = norm(y(i, :) - y(j, :));
-            if (dist < R) && (dist ~= 0)
+            if (dist < R) && (dist ~= 0) && y(j, 1) < 50
                 total_count = total_count + 1;
                 diff = qy(i) - qy(j);
                 if diff > 0
