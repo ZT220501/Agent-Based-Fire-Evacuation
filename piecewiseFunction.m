@@ -8,7 +8,7 @@ function result = piecewiseFunction(x, y)
     region6 = (y >= 40 & y <= 50);
 
     slope = 50; % slope towards street, on the plane that has houses
-    max_plane_height = 50; % hightest difference on the plane
+    max_plane_height = slope*10; % hightest difference on the plane
     max_road_height = 80; % highest point on a road
     k = max_road_height / 50;
     wall_height = 1e20; % wall height
