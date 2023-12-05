@@ -52,9 +52,9 @@ function result = piecewiseFunction(x, y)
         result(sr_o) = v_o(sr_o);
         v_i = v1 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
-        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        v_i_a = v1 + wall_slope*(x-center(1)-l_inf_min_i);
         result(sr_i_a) = v_i_a(sr_i_a);
-        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        v_i_b = v1 - wall_slope*(x-center(1)+l_inf_min_i);
         result(sr_i_b) = v_i_b(sr_i_b);
     end
 
@@ -71,9 +71,9 @@ function result = piecewiseFunction(x, y)
         result(sr_o) = v_o(sr_o);
         v_i = v3 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
-        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        v_i_a = v3 + wall_slope*(x-center(1)-l_inf_min_i);
         result(sr_i_a) = v_i_a(sr_i_a);
-        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        v_i_b = v3 - wall_slope*(x-center(1)+l_inf_min_i);
         result(sr_i_b) = v_i_b(sr_i_b);
     end
 
@@ -90,9 +90,9 @@ function result = piecewiseFunction(x, y)
         result(sr_o) = v_o(sr_o);
         v_i = v4 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
-        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        v_i_a = v4 + wall_slope*(x-center(1)-l_inf_min_i);
         result(sr_i_a) = v_i_a(sr_i_a);
-        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        v_i_b = v4 - wall_slope*(x-center(1)+l_inf_min_i);
         result(sr_i_b) = v_i_b(sr_i_b);
     end
 
@@ -109,9 +109,9 @@ function result = piecewiseFunction(x, y)
         result(sr_o) = v_o(sr_o);
         v_i = v6 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
-        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        v_i_a = v6 + wall_slope*(x-center(1)-l_inf_min_i);
         result(sr_i_a) = v_i_a(sr_i_a);
-        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        v_i_b = v6 - wall_slope*(x-center(1)+l_inf_min_i);
         result(sr_i_b) = v_i_b(sr_i_b);
     end
     
