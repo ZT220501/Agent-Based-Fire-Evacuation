@@ -7,7 +7,7 @@ function result = piecewiseFunction(x, y)
     region5 = (y >= 35 & y < 40);
     region6 = (y >= 40 & y <= 50);
 
-    slope = 50; % slope towards street, on the plane that has houses
+    slope = 50; % slope towards street, on the plane that has houses 
     max_plane_height = slope*10; % hightest difference on the plane
     max_road_height = 80; % highest point on a road
     k = max_road_height / 50;
@@ -45,11 +45,17 @@ function result = piecewiseFunction(x, y)
         sr_o = l_inf > l_inf_min_o & l_inf < l_inf_max_o;
         sr_o((y > l_inf_min_o + center(2)) & (y < l_inf_max_o + center(2))) = false;
         sr_i = l_inf > l_inf_min_i & l_inf < l_inf_max_i;
-        sr_i((abs(x-center(1)) < l_inf_min_i) & (y > l_inf_min_i + center(2))) = false;
+        sr_i((y > l_inf_min_i + center(2)) & (y < l_inf_max_i + center(2))) = false;
+        sr_i_a = y > center(2) + l_inf_min_i & y < center(2) + l_inf_max_i & x > center(1) + l_inf_min_i & x < center(1) + l_inf_max_i;
+        sr_i_b = y > center(2) + l_inf_min_i & y < center(2) + l_inf_max_i & x > center(1) - l_inf_max_i & x < center(1) - l_inf_min_i;
         v_o = v1 + wall_height - wall_slope*(l_inf-l_inf_min_o);
         result(sr_o) = v_o(sr_o);
         v_i = v1 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
+        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        result(sr_i_a) = v_i_a(sr_i_a);
+        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        result(sr_i_b) = v_i_b(sr_i_b);
     end
 
     for i = [10 25 40]
@@ -59,10 +65,16 @@ function result = piecewiseFunction(x, y)
         sr_o((y < - l_inf_min_o + center(2)) & (y > - l_inf_max_o + center(2))) = false;
         sr_i = l_inf > l_inf_min_i & l_inf < l_inf_max_i;
         sr_i((abs(x-center(1)) < l_inf_min_i) & (y < -l_inf_min_i + center(2))) = false;
+        sr_i_a = y > center(2) - l_inf_max_i & y < center(2) - l_inf_min_i & x > center(1) + l_inf_min_i & x < center(1) + l_inf_max_i;
+        sr_i_b = y > center(2) - l_inf_max_i & y < center(2) - l_inf_min_i & x > center(1) - l_inf_max_i & x < center(1) - l_inf_min_i;
         v_o = v3 + wall_height - wall_slope*(l_inf-l_inf_min_o);
         result(sr_o) = v_o(sr_o);
         v_i = v3 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
+        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        result(sr_i_a) = v_i_a(sr_i_a);
+        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        result(sr_i_b) = v_i_b(sr_i_b);
     end
 
     for i = [10 25 40]
@@ -72,10 +84,16 @@ function result = piecewiseFunction(x, y)
         sr_o((y > l_inf_min_o + center(2)) & (y < l_inf_max_o + center(2))) = false;
         sr_i = l_inf > l_inf_min_i & l_inf < l_inf_max_i;
         sr_i((abs(x-center(1)) < l_inf_min_i) & (y > l_inf_min_i + center(2))) = false;
+        sr_i_a = y > center(2) + l_inf_min_i & y < center(2) + l_inf_max_i & x > center(1) + l_inf_min_i & x < center(1) + l_inf_max_i;
+        sr_i_b = y > center(2) + l_inf_min_i & y < center(2) + l_inf_max_i & x > center(1) - l_inf_max_i & x < center(1) - l_inf_min_i;
         v_o = v4 + wall_height - wall_slope*(l_inf-l_inf_min_o);
         result(sr_o) = v_o(sr_o);
         v_i = v4 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
+        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        result(sr_i_a) = v_i_a(sr_i_a);
+        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        result(sr_i_b) = v_i_b(sr_i_b);
     end
 
     for i = [10 25 40]
@@ -85,10 +103,16 @@ function result = piecewiseFunction(x, y)
         sr_o((y < - l_inf_min_o + center(2)) & (y > - l_inf_max_o + center(2))) = false;
         sr_i = l_inf > l_inf_min_i & l_inf < l_inf_max_i;
         sr_i((abs(x-center(1)) < l_inf_min_i) & (y < -l_inf_min_i + center(2))) = false;
+        sr_i_a = y > center(2) - l_inf_max_i & y < center(2) - l_inf_min_i & x > center(1) + l_inf_min_i & x < center(1) + l_inf_max_i;
+        sr_i_b = y > center(2) - l_inf_max_i & y < center(2) - l_inf_min_i & x > center(1) - l_inf_max_i & x < center(1) - l_inf_min_i;
         v_o = v6 + wall_height - wall_slope*(l_inf-l_inf_min_o);
         result(sr_o) = v_o(sr_o);
         v_i = v6 + wall_slope*(l_inf-l_inf_min_i);
         result(sr_i) = v_i(sr_i);
+        v_i_a = wall_slope*(x-center(1)-l_inf_min_i);
+        result(sr_i_a) = v_i_a(sr_i_a);
+        v_i_b = - wall_slope*(x-center(1)+l_inf_min_i);
+        result(sr_i_b) = v_i_b(sr_i_b);
     end
     
 end
