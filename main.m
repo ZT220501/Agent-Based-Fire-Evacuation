@@ -6,6 +6,7 @@ N1 = 30;                        %Number of people outside of the buildings
 N2 = 4;                    %Number of people inside each of the 12 buildings
 building_num = 12;
 N = N1 + N2 * building_num;
+% N = N1;
 
 
 x = rand(N1, 1) .* 4 + 1;
@@ -106,14 +107,14 @@ all_X = zeros(iter_num, N, 2);
 
 
 % Initialize video
-myVideo = VideoWriter('simulation'); %open video file
-% myVideo = VideoWriter('simulation_without_house'); %open video file
-myVideo.FrameRate = 8;  %can adjust this, 5 - 10 works well
+% myVideo = VideoWriter('simulation_homogeneous'); %open video file
+myVideo = VideoWriter('simulation_fixed'); %open video file
+myVideo.FrameRate = 10;  %can adjust this, 5 - 10 works well
 open(myVideo)
 
 for i=1:iter_num
     %Homogeneous case update
-%     [X, V, q] = update(X, V, T/iter_num, @DOrsogna_Bertozzi_homo, @potential, e, q);
+%     [X, V, qx] = update(X, V, T/iter_num, @DOrsogna_Bertozzi_homo, @potential, e, qx);
 %     [X, V] = update(X, V, T/iter_num, @Cucker_Smale_homo, @potential, e, q);
 
 
