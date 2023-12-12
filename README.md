@@ -15,4 +15,4 @@ The simulation above is the simulation of the heterogeneous model without house,
 
 ![](https://github.com/ZT220501/Agent-Based-Fire-Evacuation/blob/main/Results/simulation_fixed.gif)
 
-The simulation above is the simulation of the heterogeneous model with house. In the simulation, people could get out of the buildings and get around the buildings without passing through the walls. As in the previous case, cars would not crush over people and cars do not adhere to each other in this simulation
+The simulation above is the simulation of the heterogeneous model with house. In the simulation, people could get out of the buildings and get around the buildings without passing through the walls. As in the previous case, cars would not crush over people and cars do not adhere to each other in this simulation.
