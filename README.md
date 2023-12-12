@@ -14,4 +14,5 @@ The simulation above is the simulation of the heterogeneous model without house,
 The simulation above is the simulation of the heterogeneous model without house, using the Morse potential when agents are away from a car and use Lennard-Jones term for repulsion when agents are extremely close to a car. In this case, a person will be repulsed away from cars when it is extremely close to a car so that cars can not crush over people. Moreover, cars do not adhere to each other in this simulation.
 
 ![](https://github.com/ZT220501/Agent-Based-Fire-Evacuation/blob/main/Results/simulation_fixed.gif)
+
 The simulation above is the simulation of the heterogeneous model with house. In the simulation, people could get out of the buildings and get around the buildings without passing through the walls. As in the previous case, cars would not crush over people and cars do not adhere to each other in this simulation
